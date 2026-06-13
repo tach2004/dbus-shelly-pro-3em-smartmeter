@@ -51,7 +51,7 @@ class DbusShelly3emService:
     else:
         productid = 45069
 
-    self._dbusservice = VeDbusService("{}.http_{:02d}".format(servicename, deviceinstance))
+    self._dbusservice = VeDbusService("{}.http_{:02d}".format(servicename, deviceinstance), register=False)
     self._paths = paths
  
     logging.debug("%s /DeviceInstance = %d" % (servicename, deviceinstance))
@@ -80,7 +80,10 @@ class DbusShelly3emService:
     for path, settings in self._paths.items():
       self._dbusservice.add_path(
         path, settings['initial'], gettextcallback=settings['textformat'], writeable=True, onchangecallback=self._handlechangedvalue)
- 
+        
+    # Erst NACH allen add_path-Aufrufen registrieren
+    self._dbusservice.register()
+
     # last update
     self._lastUpdate = 0
  
