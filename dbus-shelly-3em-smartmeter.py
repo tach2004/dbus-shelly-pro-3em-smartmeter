@@ -23,12 +23,12 @@ from vedbus import VeDbusService
 
 
 class Phase:
-  def __init__(self, voltage, current, power, total_act_energy, act_ret_energy):
+  def __init__(self, voltage, current, power, total_act_energy, total_act_ret_energy):
     self.voltage = voltage
     self.current = current
     self.power = power
     self.total_act_energy = total_act_energy / 1000
-    self.act_ret_energy = act_ret_energy / 1000
+    self.total_act_ret_energy = total_act_ret_energy / 1000
 
 
 
